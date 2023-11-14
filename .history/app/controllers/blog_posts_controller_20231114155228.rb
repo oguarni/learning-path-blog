@@ -3,7 +3,7 @@ class BlogPostsController < ApplicationController
   before_action :set_blog_post, except: [:index, :new, :create] # only: [:show, :edit, :update, :destroy]
 
   def index
-    @blog_posts = user_signed_in? ? BlogPost.sorted : BlogPost.published.sorted
+    @blog_posts = user_signed_in? ? BlogPost.all : BlogPost.published
   end
 
   def show

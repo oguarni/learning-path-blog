@@ -3,7 +3,7 @@ class BlogPostsController < ApplicationController
   before_action :set_blog_post, except: [:index, :new, :create] # only: [:show, :edit, :update, :destroy]
 
   def index
-    @blog_posts = user_signed_in? ? BlogPost.sorted : BlogPost.published.sorted
+    @blog_posts = BlogPost.published
   end
 
   def show
@@ -23,6 +23,7 @@ class BlogPostsController < ApplicationController
   end
 
   def edit
+    @blog_post = BlogPost.find(params[:id])
   end
 
   def update
@@ -34,6 +35,7 @@ class BlogPostsController < ApplicationController
   end
 
   def destroy
+    @blog_post = BlogPost.find(params[:id])
     @blog_post.destroy
     redirect_to root_path
   end
